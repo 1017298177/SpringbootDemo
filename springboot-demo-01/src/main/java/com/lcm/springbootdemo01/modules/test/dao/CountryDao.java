@@ -16,11 +16,10 @@ public interface CountryDao {
     @Results(id = "countryCities",value = {
             @Result(column = "country_id",property = "countryId"),
             @Result(column = "country_id",property = "cities",
-            javaType = List.class,
-            many = @Many(select = "com.lcm.springbootdemo01.modules.test.dao.CityDao.getCitiesByCountryId"))
+                    javaType = List.class,
+                    many = @Many(select = "com.lcm.springbootdemo01.modules.test.dao.CityDao.getCitiesByCountryId"))
     })
     public Country getCountryByCountryId(int countryId);
-
     @Select("select * from m_country where country_name = #{countryName}")
     @ResultMap("countryCities")
     public Country getCountryByCountryName(String countryName);
