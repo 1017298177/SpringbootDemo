@@ -21,7 +21,7 @@ public class WebMvcConfig {
         Connector connector = new Connector();
         connector.setPort(httpPort);
         connector.setScheme("http");
-        return connector    ;
+        return connector;
     }
 
     @Bean

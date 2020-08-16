@@ -7,6 +7,7 @@ import com.lcm.springbootdemo01.modules.common.vo.SearchVo;
 import com.lcm.springbootdemo01.modules.test.dao.CityDao;
 import com.lcm.springbootdemo01.modules.test.entity.City;
 import com.lcm.springbootdemo01.modules.test.service.CityService;
+import com.lcm.springbootdemo01.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CityServiceImpl implements CityService {
+public class CityServiceImpl implements CityService
+{
 
     @Autowired
     private CityDao cityDao;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @Override
     public List<City> getCitiesByCountryId(int countryId) {
@@ -58,5 +62,12 @@ public class CityServiceImpl implements CityService {
     public Result<City> deleteCity(int cityId) {
         cityDao.deleteCity(cityId);
         return new Result<>("delete success",Result.ResultStatus.SUCCESS.status);
+    }
+
+    @Override
+    public City getCities(int cityId) {
+        City city = cityDao.getCities(cityId);
+        redisUtil.set("city",city);
+        return city;
     }
 }

@@ -43,4 +43,7 @@ public interface CityDao {
     @Delete("delete from m_city where city_id  = #{cityId}")
     void deleteCity(int cityId);
 
+
+    @Select("select * from m_city where city_id = #{cityId}")
+    City getCities(int cityId);
 }

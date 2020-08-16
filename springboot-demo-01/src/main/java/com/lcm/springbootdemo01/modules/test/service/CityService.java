@@ -20,4 +20,5 @@ public interface CityService {
 
    Result<City> deleteCity(int cityId);
 
+    City getCities(int cityId);
 }
